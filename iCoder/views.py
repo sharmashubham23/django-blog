@@ -4,8 +4,11 @@ from django.contrib import messages
 from django.contrib.auth.models import User 
 from django.contrib.auth  import authenticate,  login, logout
 # Create your views here.
-def home(request): 
-    return render(request, "home.html")
+def home(request):
+    allPosts= Post.objects.all()
+    context={'allPosts': allPosts}
+    return render(request, "blogHome.html", context)
+    
 
 def contact(request):
     if request.method=="POST":

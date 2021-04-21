@@ -30,6 +30,7 @@ class Post(models.Model):
     slug=models.CharField(max_length=130)
     views= models.IntegerField(default=0)
     timeStamp=models.DateTimeField(blank=True)
+    desc=models.CharField(max_length=255,blank=False, default='random')
     content=models.TextField()
 
     category = models.CharField(max_length=50,choices=categorylist,blank=False, default='random')
@@ -37,6 +38,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title + " by " + self.author
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("blogPost", kwargs={"slug": self.slug})
+    
 
 class BlogComment(models.Model):
     sno= models.AutoField(primary_key=True)

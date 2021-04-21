@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '%20xyid15+%50((4123tetuhy42&zv=z5-j*zla@8nkp((bd-2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["52.168.48.24","indiajob.eastus.cloudapp.azure.com","indiajobinfo.in", "127.0.0.1"]
 
 
 # Application definition
@@ -39,9 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'blog.apps.BlogConfig',
     'django.contrib.humanize',
+    'iCoder',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,7 +63,7 @@ ROOT_URLCONF = 'iCoder.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['iCoder/templates'],
+        'DIRS': ['/home/azureuser/newproject/django-blog/iCoder/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,6 +131,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,  "static"),
 ]
+
+STATIC_ROOT = '/home/azureuser/newproject/site/public/static'
 
 # # Managing media
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

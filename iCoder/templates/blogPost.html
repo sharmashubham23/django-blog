@@ -5,14 +5,16 @@
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <meta name="description" content="{{post.desc}}">
+  <meta name="keywords" content="UPSC, Government Jobs, Government Exams, Earn money online, Free online courses, certification courses, Internships, Jobs, State Government Jobs, SSC CHSL, Admit card, Exam results">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="IndiaJobInfo">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
 
-  <title>Stand Blog - Post Details</title>
+  <title>{{post.title}}</title>
 {% load static %}
   <!-- Bootstrap core CSS -->
   <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %} " rel="stylesheet">
@@ -22,14 +24,8 @@
   <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %} ">
   <link rel="stylesheet" href="{% static 'assets/css/templatemo-stand-blog.css' %} ">
   <link rel="stylesheet" href="{% static 'assets/css/owl.css' %} ">
-  <!--
+  <link rel="icon" type="image/png" sizes="64x64" href="{% static 'assets/images/favicon-256x256.png' %}">
 
-TemplateMo 551 Stand Blog
-
-https://templatemo.com/tm-551-stand-blog
-
-
--->
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0" nonce="6smBMZE3"></script>
 
 </head>
@@ -50,8 +46,8 @@ https://templatemo.com/tm-551-stand-blog
   <header class="">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <h2>Stand Blog<em>.</em></h2>
+        <a class="navbar-brand" href="/">
+          <h2>India Job Info<em>.</em></h2>
         </a>
         <button id="myCheck" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
           aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,22 +55,21 @@ https://templatemo.com/tm-551-stand-blog
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="index.html">Home
-                <span class="sr-only">(current)</span>
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home
               </a>
             </li>
             <li class="nav-item">
-              <a data-dismiss="collapse" aria-label="Close" class="nav-link" href="#">About Us</a>
+              <a data-dismiss="collapse" aria-label="Close" class="nav-link" href="#">Privacy Policy</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Blog Entries</a>
+              <a class="nav-link" href="#">Disclaimer</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Post Details</a>
+              <a class="nav-link" href="#">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact Us</a>
+              <a class="nav-link" href="/contact">Contact Us</a>
             </li>
           
 
@@ -107,6 +102,14 @@ SignUp
         </div>
       </div>
     </nav>
+    {% for message in messages  %}            
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <strong>Message : </strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+      {% endfor %} 
   </header>
   {% comment %} <script>
 $(document).ready(function () {
@@ -122,14 +125,7 @@ function myFunction() {
 
 }
 </script>
-  {% for message in messages  %}            
-      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            <strong>Message : </strong> {{ message }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-      {% endfor %} 
+  
 
   <!-- SignUp Modal -->
 <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModal" aria-hidden="true">
@@ -289,16 +285,21 @@ function myFunction() {
                       <div class="row">
                         <div class="col-6">
                           <ul class="post-tags">
-                            <li><i class="fa fa-tags"></i></li>
+                            {% comment %} <li><i class="fa fa-tags"></i></li>
                             <li><a href="#">Best Templates</a>,</li>
-                            <li><a href="#">TemplateMo</a></li>
+                            <li><a href="#">TemplateMo</a></li> {% endcomment %}
+                            
+                  {% comment %} <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+<script type="IN/Share" data-url="https://www.linkedin.com"></script> {% endcomment %}
                           </ul>
                         </div>
                         <div class="col-6">
                           <ul class="post-share">
-                            <li><i class="fa fa-share-alt"></i></li>
-                            <li><a href="#">Facebook</a>,</li>
-                            <li><a href="#"> Twitter</a></li>
+                            {% comment %} <li><i class="fa fa-share-alt"></i></li> {% endcomment %}
+                            {% comment %} <li><a href="#">Facebook</a>,</li> {% endcomment %}
+                            {% comment %} <li><a href="#"> Twitter</a></li> {% endcomment %}
+                            <div class="fb-like" data-href="https://indiajobinfo.in/blog/{{post.slug}}" data-width="100" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
+                </div>
                           </ul>
                         </div>
                       </div>
@@ -313,9 +314,9 @@ function myFunction() {
                     <h2>4 comments</h2>
                   </div> {% endcomment %}
                   {% comment %} <div class="content">
-                    <div class="fb-comments" data-href="http://127.0.0.1:8000/blog/First%20post" data-width="" data-numposts="5"></div>
+                    <div class="fb-comments" data-href="https://indiajobinfo.in/blog/First%20post" data-width="" data-numposts="5"></div>
                   </div> {% endcomment %}
-                <div class="fb-comments" data-href="http://127.0.0.1:8000/blog/{{post.slug}}" data-width="100%" data-numposts="5"></div>
+                <div class="fb-comments" data-href="https://indiajobinfo.in/blog/{{post.slug}}" data-width="100%" data-numposts="5"></div>
 
                 {% comment %} </div> {% endcomment %}
               </div>
@@ -360,7 +361,7 @@ function myFunction() {
               </div>
             </div>
           </div>
-        </div>
+        
         <div class="col-lg-4">
           <div class="sidebar">
             <div class="row">
@@ -404,7 +405,7 @@ function myFunction() {
               </div>
               <div class="col-lg-12">
                 <div class="sidebar-item tags">
-                  <div class="sidebar-heading">
+                  {% comment %} <div class="sidebar-heading">
                     <h2>Tag Clouds</h2>
                   </div>
                   <div class="content">
@@ -417,11 +418,11 @@ function myFunction() {
                       <li><a href="#">PSD</a></li>
                       <li><a href="#">Responsive</a></li>
                     </ul>
-                  </div>
+                  </div> {% endcomment %}
                   {% comment %} <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
 <script type="IN/Share" data-url="https://www.linkedin.com"></script> {% endcomment %}
-        <div class="fb-like" data-href="http://127.0.0.1:8000/blog/{{post.slug}}" data-width="100" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
-                </div>
+        {% comment %} <div class="fb-like" data-href="http://127.0.0.1:8000/blog/{{post.slug}}" data-width="100" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
+                </div> {% endcomment %}
               </div>
             </div>
           </div>
@@ -445,9 +446,9 @@ function myFunction() {
         </div>
         <div class="col-lg-12">
           <div class="copyright-text">
-            <p>Copyright 2020 Stand Blog Co.
+            <p>All Rights Reserved 
 
-              | Design: <a rel="nofollow" href="https://templatemo.com" target="_parent">TemplateMo</a></p>
+              © <a rel="dofollow" href="http://indiajobinfo.in" target="_parent">India Job Info</a></p>
           </div>
         </div>
       </div>

@@ -1,11 +1,225 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %} Search Results {% endblock title %}
-{% block blogactive %} active {% endblock blogactive %} 
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Get all information about current job vacancies and upcoming vacancies details so that you never miss any update. Government jobs notifications, Exam date, syllabus, preparation strategy, exam results all at one place">
+  <meta name="keywords" content="UPSC, Government Jobs, Government Exams, Earn money online, Free online courses, certification courses, Internships, Jobs, State Government Jobs, SSC CHSL, Admit card, Exam results">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="IndiaJobInfo">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
+
+  <title>{{post.title}}</title>
+{% load static %}
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %} " rel="stylesheet">
 
 
-{% block body %}
-<div class="container my-3">
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="{% static 'assets/css/fontawesome.css' %} ">
+  <link rel="stylesheet" href="{% static 'assets/css/templatemo-stand-blog.css' %} ">
+  <link rel="stylesheet" href="{% static 'assets/css/owl.css' %} ">
+  <link rel="icon" type="image/png" sizes="64x64" href="{% static 'assets/images/favicon-256x256.png' %}">
+
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v10.0" nonce="6smBMZE3"></script>
+
+</head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+ <div id="preloader">
+    <div class="jumper">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div> 
+  <!-- ***** Preloader End ***** -->
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="/">
+          <h2>India Job Info<em>.</em></h2>
+        </a>
+        <button id="myCheck" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+          aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home
+              </a>
+            </li>
+            <li class="nav-item">
+              <a data-dismiss="collapse" aria-label="Close" class="nav-link" href="#">Privacy Policy</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Disclaimer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact">Contact Us</a>
+            </li>
+          
+
+{% if user.is_authenticated %}
+          {% comment %} <ul class="navbar-nav ml-auto"> {% endcomment %}
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href='#' id="navbarDropdown" role="button" data-toggle="dropdown"> Welcome {{request.user}}</a>
+<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/logout">Logout</a>
+
+        </div>
+      </li>
+      {% comment %} </ul> {% endcomment %}
+{% else %}
+<li class="nav-item">
+  <!-- Button to  trigger Login modal -->
+<a type="button" onclick="myFunction()" id="mlogin" class=" btn btn-outline-warning " data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#loginModal">
+Login
+</a>
+
+<a type="button" onclick="myFunction()" id="mlsignup" class=" btn btn-outline-warning " data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target="#signupModal">
+SignUp
+</a>
+</li>
+</ul>
+{% endif %}
+{% comment %} <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button> {% endcomment %}
+        </div>
+      </div>
+    </nav>
+      {% for message in messages  %}            
+      <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            <strong>Message : </strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+      {% endfor %} 
+  </header>
+  {% comment %} <script>
+$(document).ready(function () {
+    $("nav").find("li").on("click", "a", function () {
+        $('.navbar-collapse').collapse('hide');
+    });
+});
+</script> {% endcomment %}
+<script>
+function myFunction() {
+  //document.getElementById("mlogin").setAttribute("class", "democlass"); = "Hello World";
+  document.getElementById("myCheck").click();
+
+}
+</script>
+
+
+  <!-- SignUp Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModal" aria-hidden="true">
+  <div class="modal-dialog" style="
+    margin-top: 134px;
+">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="signupModalTitle">SignUp Here</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action= "/signup" method='post'>
+ <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" id="username" name="username" placeholder="Choose a unique username" required>
+  </div> 
+  <div class="form-group">
+    <label for="fname">Full Name</label>
+    <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter Your First Name" required>
+  </div>
+  {% comment %} <div class="form-group">
+    <label for="lname">Last Name</label>
+    <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter Your Last Name" required>
+  </div> {% endcomment %}
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+  </div>
+  <div class="form-group">
+    <label for="pass1">Password</label>
+    <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose Your Password" required>
+  </div>
+  {% comment %} <div class="form-group">
+    <label for="pass2">Confirm Password</label>
+    <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Enter your password again" required>
+  </div> {% endcomment %}
+ 
+
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+      </div>
+      <div class="modal-footer">
+                    <a data-dismiss="modal" data-toggle="modal" data-target="#loginModal" style="cursor: pointer; color: blue;">Log In</a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+  <div class="modal-dialog" style="
+    margin-top: 134px;
+">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalTitle">Login Here</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/login" method="POST"> {% csrf_token %}
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" id="loginusername" name="loginusername" placeholder="Enter your username "required>
+  </div>
+  <div class="form-group">
+    <label for="pass">Enter your password </label>
+    <input type="password" class="form-control" id="loginpassword" name="loginpassword" placeholder="Enter your password "required>
+  </div>
+ 
+        <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+      </div>
+       <div class="modal-footer">
+                           <a data-dismiss="modal" data-toggle="modal" data-target="#signupModal" style="cursor: pointer; color: blue;">Log In</a>
+
+      </div>
+      </div>
+      </div>
+      </div>
+<!-- Modal ends here  -->
+
+<div class="container" style="
+    padding-top: 150px;
+">
     <h2>Search results : </h2>
     {% if allPosts|length < 1 %}
    <p>No search results</p>
@@ -33,14 +247,57 @@
             </div>
             
         </div>
-        {% comment %} <div class="col-auto d-none d-lg-block">
-            <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-            </svg>
-        </div> {% endcomment %}
+        
         </div>
 
         {% endfor %}
     </div>
- {% endblock %}
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="social-icons">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Behance</a></li>
+            <li><a href="#">Linkedin</a></li>
+            <li><a href="#">Dribbble</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-12">
+          <div class="copyright-text">
+            <p>All Rights Reserved 
+
+              © <a rel="dofollow" href="http://indiajobinfo.in" target="_parent">India Job Info</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %} "></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %} "></script>
+
+
+  <!-- Additional Scripts -->
+  <script src="{% static 'assets/js/custom.js' %} "></script>
+  <script src="{% static 'assets/js/owl.js' %} "></script>
+  <script src="{% static 'assets/js/slick.js' %} "></script>
+  <script src="{% static 'assets/js/isotope.js' %} "></script>
+  <script src="{% static 'assets/js/accordions.js' %} "></script>
+
+
+  <script language="text/Javascript">
+    cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+    function clearField(t) {                   //declaring the array outside of the
+      if (!cleared[t.id]) {                      // function makes it static and global
+        cleared[t.id] = 1;  // you could use true and false, but that's more typing
+        t.value = '';         // with more chance of typos
+        t.style.color = '#fff';
+      }
+    }
+  </script>
+
+</body>
+</html>
