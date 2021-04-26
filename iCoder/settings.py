@@ -132,7 +132,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,  "static"),
 ]
 
-STATIC_ROOT = '/home/azureuser/newproject/site/public/static'
+# STATIC_ROOT = STATIC_URL
 
 # # Managing media
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
